@@ -6,7 +6,6 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
   * 3.2.2
 
 * System dependencies
@@ -14,6 +13,10 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
+  * Install PostgreSQL and Client Library
+  * Create Database
+    * `bundle install`
+    * `bundle exec rails db:create`
 
 * Database initialization
 
