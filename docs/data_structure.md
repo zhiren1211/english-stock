@@ -7,16 +7,16 @@
 | id | uuid | not null, unique |  | ユーザーID |
 | name | string | not null |  | ユーザー名 |
 | email | string | not null, unique |  | メールアドレス |
-| password_digest | not null |  |  | パスワード |
+| password_digest | string | not null |  | パスワード |
 
-## words
+## cards
 
 | カラム名 | データ型 | 制約 | デフォルト | 備考 |
 | - | - | - | - | - |
-| id | uuid | not null, unique |  | ワードID |
-| name | string | not null, unique(user内) |  | ワード |
-| comment | text |  |  | 備考コメント |
-| status | integer | not null | 1 | ステータス（enum） |
+| id | uuid | not null, unique |  | カードID |
+| name | string | not null, unique(user内) |  | カード名（ワード） |
+| comment | text |  | "" | 備考コメント |
+| status | integer | not null | 0 | ステータス（enum） |
 | user_id | uuid | not null |  | ユーザーID |
 
 ## labels
@@ -27,11 +27,11 @@
 | name | string | not null, unique(user内) |  | ラベル |
 | user_id | uuid | not null |  | ユーザーID |
 
-## words_labels
+## cards_labels
 
 | カラム名 | データ型 | 制約 | デフォルト | 備考 |
 | - | - | - | - | - |
-| word_id | uuid | not null, unique(user内) |  | ワードID |
+| card_id | uuid | not null, unique(user内) |  | カードID |
 | label_id | uuid | not null, unique(user内) |  | ラベルID |
 
 ## admin_users
@@ -41,4 +41,4 @@
 | id | uuid | not null, unique |  | 管理ユーザーID |
 | name | string | not null |  | 管理ユーザー名 |
 | email | string | not null, unique |  | メールアドレス |
-| password_digest | not null |  |  | パスワード |
+| password_digest | string | not null |  | パスワード |
