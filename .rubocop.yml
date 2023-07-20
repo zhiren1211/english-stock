@@ -1,0 +1,58 @@
+inherit_from:
+  - .rubocop_todo.yml
+  - .rubocop_zhiren1211.yml
+
+# 公式ドキュメント
+# https://docs.rubocop.org/en/stable/
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-capybara
+
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - 'app/views/**/*.erb'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+  NewCops: disable
+  UseCache: true
+  TargetRubyVersion: 3.2
+
+Rails:
+  Enabled: true
+
+# freezeした文字列リテラルを含むファイルについて、Ruby 3.0でデフォルトとなる
+# Immutableな文字列との互換性を先行して検証するためのマジックコメントを強制しない
+# ようにします。
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 後置ifおよび後置unlessを使用しないことを許容します。
+Style/IfUnlessModifier:
+  Enabled: false
+
+# 1行で記述されるブロックのパラメータ名を任意の名前にできるようにする。
+# https://github.com/bbatsov/ruby-style-guide#reduce-blocks
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# ファイル末尾の空行チェックを無効にする
+#
+# app/models/*.rb は自動生成されるファイル末尾のアノテーションコメントに
+# よって末尾に空行が入るため。
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+# クラスの行数チェックを無効にする
+Metrics/ClassLength:
+  Enabled: false
+
+# モジュールの行数チェックを無効にする
+Metrics/ModuleLength:
+  Enabled: false
