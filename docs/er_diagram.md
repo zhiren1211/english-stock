@@ -7,7 +7,7 @@ erDiagram
         string password_digest
     }
 
-    word {
+    card {
         uuid id PK
         string name
         text comment
@@ -21,8 +21,8 @@ erDiagram
         ssid user_id FK "user"
     }
 
-    word_label {
-        uuid word_id
+    card_label {
+        uuid card_id
         uuid label_id
     }
 
@@ -33,8 +33,8 @@ erDiagram
         string password_digest
     }
 
-    user ||--o{ word : ""
+    user ||--o{ card : ""
     user ||--o{ label : ""
-    word ||--o{ word_label: ""
-    label ||--o{ word_label: ""
+    card ||--o{ card_label: ""
+    label ||--o{ card_label: ""
 ```

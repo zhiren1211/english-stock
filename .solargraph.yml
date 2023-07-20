@@ -10,7 +10,9 @@ require: []
 domains: []
 reporters:
 - rubocop
-- require_not_found
+- require_not_found:
+  exclude:
+      - spec/**/*
 formatter:
   rubocop:
     cops: safe
