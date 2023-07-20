@@ -1,0 +1,56 @@
+# Rubocop configuration for common style
+
+# 日本語でコメントを書けるようにする
+Style/AsciiComments:
+  Enabled: false
+
+# 1行あたりの文字数の上限をチェックしない
+Layout/LineLength:
+  Enabled: false
+
+# 1メソッドあたりの行数上限を20にする
+Metrics/MethodLength:
+  Max: 20
+
+# 桁数の多い数値でもアンダースコアは不要にする
+Style/NumericLiterals:
+  Enabled: false
+
+# 文字列にはダブルクォートを利用する
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# 複数行のメソッドチェーンでは継続行を通常通りのインデントにする
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# 一時的な変数等でアンダースコア始まりの変数を許容する
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+# 複数行の配列リテラルの末尾のカンマを強制する
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+# 複数行ハッシュリテラルの末尾のカンマを強制する
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+# 複数行の引数の末尾カンマを強制する
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+# if/unless文をガード節にすることを指摘しない
+Style/GuardClause:
+  Enabled: false
+
+# if/unless修飾子の使用を強制しない
+Style/IfUnlessModifier:
+  Enabled: false
+
+# 否定形のifを許可する
+Style/NegatedIf:
+  Enabled: false

@@ -1,0 +1,32 @@
+name: rubocop
+
+on:
+  # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#pull_request
+  - pull_request
+
+jobs:
+  reviewdog:
+    name: reviewdog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # https://github.com/ruby/setup-ruby
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '.ruby-version'
+          bundler-cache: true
+
+      # https://github.com/reviewdog/action-rubocop
+      - name: rubocop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile rubocop-performance:gemfile
+          fail_on_error: true
+          filter_mode: added
+          reporter: github-pr-review
+          level: warning

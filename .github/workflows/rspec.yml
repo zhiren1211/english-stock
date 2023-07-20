@@ -1,0 +1,49 @@
+name: rspec
+
+on:
+  # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#pull_request
+  - pull_request
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: english-stock_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '.ruby-version'
+          bundler-cache: true
+
+      - name: Set env
+        run: |
+          echo "DATABASE_URL=postgres://postgres:postgres@localhost:5432/english-stock_test" >> "$GITHUB_ENV"
+
+      - name: Setup DB
+        run: |
+          bundle exec rails db:schema:load
+
+      - name: Setup webpacker
+        run: |
+          bin/rails webpacker:install
+          bin/rails webpacker:compile
+
+      - name: Run rspec
+        run: bundle exec rspec
+
